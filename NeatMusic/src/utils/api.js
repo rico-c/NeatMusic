@@ -1,4 +1,4 @@
-const _api = 'http://127.0.0.1:3000';
+const _api = 'http://10.0.2.2:3000';
 
 // 歌手分类列表
 export const singerCate = _api + '/artist/list';
@@ -16,3 +16,5 @@ export const similar = _api + '/simi/artist'
 export const ranking = _api + '/top/list'
 // 歌手榜
 export const singerRank = _api + '/toplist/artist'
+// 每日歌单
+export const daily = _api + '/recommend/resource'

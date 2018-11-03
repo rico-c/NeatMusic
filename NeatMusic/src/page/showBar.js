@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
 import { View,Text } from 'react-native';
 import BarItem from '../components/barItem';
-import { songCate, ranking, singerRank } from '../utils/api';
+import { songCate, ranking, singerRank, singerCate } from '../utils/api';
 
 class showBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ranking:''
+      singerCate:[]
     }
   }
 
   componentDidMount() {
-    // axios.get(ranking,{
-    //   params:{
-    //     idx:1
-    //   }
-    // }).then((res)=>{
-      
-    // })
+    fetch(singerCate)
+      .then((res)=>{
+        this.setState(prevState => ({
+          singerCate: [...prevState.singerCate,...JSON.parse(res._bodyInit).artists]
+        }));
+      })
+      .catch((err)=>{
+        console.error(err)
+      })
   }
 
   render() {
+    let singerCateList = this.state.singerCate.map((Item) => 
+      <Text key={ Item.name }> { Item.name } </Text>
+    )
+    
     return (
       <View style={{
         marginTop: 30,
@@ -31,7 +36,7 @@ class showBar extends Component {
         flexWrap: 'wrap',
         flexDirection: 'row',
       }}>
-        <Text>{}</Text>
+        { singerCateList }
         <BarItem ></BarItem>
       </View>
     );
