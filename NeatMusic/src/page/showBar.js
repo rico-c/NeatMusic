@@ -14,8 +14,11 @@ class showBar extends Component {
   componentDidMount() {
     fetch(singerCate)
       .then((res)=>{
+        return res.json()
+      })
+      .then((res)=>{
         this.setState(prevState => ({
-          singerCate: [...prevState.singerCate,...JSON.parse(res._bodyInit).artists]
+          singerCate: [...prevState.singerCate,...res.artists]
         }));
       })
       .catch((err)=>{
