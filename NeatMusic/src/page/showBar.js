@@ -36,7 +36,7 @@ class showBar extends Component {
         flexWrap: 'wrap',
         flexDirection: 'row',
       }}>
-        { singerCateList }
+        { singerCateList }  
         <BarItem ></BarItem>
       </View>
     );
