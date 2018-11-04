@@ -13,8 +13,18 @@ export const search = _api + '/search'
 // 相似歌手
 export const similar = _api + '/simi/artist'
 // 排行榜
-export const ranking = _api + '/top/list'
+export const ranking = _api + '/top/list?idx=1'
 // 歌手榜
 export const singerRank = _api + '/toplist/artist'
 // 每日歌单
 export const daily = _api + '/recommend/resource'
+// 怀旧
+export const classical = _api + '/top/playlist?cat=怀旧&limit=1'
+// 摇滚
+export const rock = _api + '/top/playlist?cat=摇滚&limit=1'
+// 流行
+export const pop = _api + '/top/playlist?cat=流行&limit=1'
+// 嘻哈
+export const hiphop = _api + '/top/playlist?cat=说唱&limit=1'
+// 播放列表详情
+export const listDetail = _api + '/playlist/detail?id='

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View,Text } from 'react-native';
+import { View, Text } from 'react-native';
 import SingerItem from '../components/singerItem';
 import RankItem from '../components/rankItem';
 import PopItem from '../components/popItem';
@@ -12,7 +12,7 @@ class showBar extends Component {
   render() {
     return (
       <View style={{
-        marginTop: 30,
+        marginTop: 40,
         marginBottom: 50,
         flex: 1,
         flexWrap: 'wrap',
@@ -20,10 +20,10 @@ class showBar extends Component {
       }}>
         <SingerItem ></SingerItem>
         <RankItem ></RankItem>
+        <ClassicalItem ></ClassicalItem>
         <RockItem ></RockItem>
         <PopItem ></PopItem>
         <HiphopItem ></HiphopItem>
-        <ClassicalItem ></ClassicalItem>
       </View>
     );
   }
