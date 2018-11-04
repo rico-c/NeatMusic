@@ -7,11 +7,11 @@ import TopBar from './page/topBar'
 class Main extends Component {
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <TopBar/>
+      <View>
         <ScrollView>
           <ShowBar />
         </ScrollView>
+        <TopBar />
         <Player />
       </View>
     );

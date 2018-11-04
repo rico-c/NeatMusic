@@ -1,36 +1,15 @@
 import React, { Component } from 'react';
 import { View,Text } from 'react-native';
-import BarItem from '../components/barItem';
-import { songCate, ranking, singerRank, singerCate } from '../utils/api';
+import SingerItem from '../components/singerItem';
+import RankItem from '../components/rankItem';
+import PopItem from '../components/popItem';
+import HiphopItem from '../components/hiphopItem';
+import ClassicalItem from '../components/classicalItem';
+import RockItem from '../components/rockItem';
+
 
 class showBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      singerCate:[]
-    }
-  }
-
-  componentDidMount() {
-    fetch(singerCate)
-      .then((res)=>{
-        return res.json()
-      })
-      .then((res)=>{
-        this.setState(prevState => ({
-          singerCate: [...prevState.singerCate,...res.artists]
-        }));
-      })
-      .catch((err)=>{
-        console.error(err)
-      })
-  }
-
   render() {
-    let singerCateList = this.state.singerCate.map((Item) => 
-      <Text key={ Item.name }> { Item.name } </Text>
-    )
-    
     return (
       <View style={{
         marginTop: 30,
@@ -39,8 +18,12 @@ class showBar extends Component {
         flexWrap: 'wrap',
         flexDirection: 'row',
       }}>
-        { singerCateList }  
-        <BarItem ></BarItem>
+        <SingerItem ></SingerItem>
+        <RankItem ></RankItem>
+        <RockItem ></RockItem>
+        <PopItem ></PopItem>
+        <HiphopItem ></HiphopItem>
+        <ClassicalItem ></ClassicalItem>
       </View>
     );
   }
