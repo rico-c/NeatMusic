@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { songCate, ranking, singerRank, singerCate } from '../utils/api';
+import { ranking } from '../utils/api';
+import Video from 'react-native-video';
 
 class rankItem extends Component {
     constructor(props) {
@@ -14,7 +15,6 @@ class rankItem extends Component {
         }
     }
     change(order) {
-        // console.warn(this.state.ranking.length)
         if (order == 'next') {
             this.setState({
                 order: this.state.order !== 198 ? this.state.order + 1 : 0,
@@ -26,6 +26,9 @@ class rankItem extends Component {
                 showImg: Object.assign({}, this.state.showImg, { uri: this.state.ranking[this.state.order !== 0 ? this.state.order - 1 : 198].al.picUrl })
             })
         }
+    }
+    play() {
+
     }
     componentDidMount() {
         fetch(ranking)
@@ -45,7 +48,10 @@ class rankItem extends Component {
     render() {
         return (
             <View >
-                <Image source={this.state.showImg} style={styles.Image} />
+                {/* <Video /> */}
+                <TouchableOpacity onPress={() => { this.play() }} style={{}}>
+                    <Image source={this.state.showImg} style={styles.Image} />
+                </TouchableOpacity>
                 <Text style={styles.title}>排行榜</Text>
                 <Text style={styles.singer}>{this.state.ranking[this.state.order] ? this.state.ranking[this.state.order].name : ''}</Text>
                 <TouchableOpacity onPress={() => { this.change('last') }} style={{ position: 'absolute', top: 100, left: 20 }}>

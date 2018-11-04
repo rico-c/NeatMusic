@@ -7,7 +7,7 @@ export const songCate = _api + '/playlist/catlist';
 // 热门歌单分类
 export const songCateHot = _api + '/playlist/hot';
 // 获取音乐
-export const getMusic = _api + '/song/url'
+export const getMusic = _api + '/song/url?br=320000&id='
 // 搜索音乐
 export const search = _api + '/search'
 // 相似歌手
