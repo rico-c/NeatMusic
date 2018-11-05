@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { ranking } from '../utils/api';
-import Video from 'react-native-video';
 
 class rankItem extends Component {
     constructor(props) {
@@ -19,7 +18,8 @@ class rankItem extends Component {
             this.setState({
                 order: this.state.order !== 198 ? this.state.order + 1 : 0,
                 showImg: Object.assign({}, this.state.showImg, { uri: this.state.ranking[this.state.order !== 198 ? this.state.order + 1 : 0].al.picUrl })
-            })
+            });
+
         } else if (order == 'last') {
             this.setState({
                 order: this.state.order !== 0 ? this.state.order - 1 : 198,
@@ -49,6 +49,7 @@ class rankItem extends Component {
         return (
             <View >
                 {/* <Video /> */}
+                {/* http://127.0.0.1:3000/song/url?br=320000&id=1934618 */}
                 <TouchableOpacity onPress={() => { this.play() }} style={{}}>
                     <Image source={this.state.showImg} style={styles.Image} />
                 </TouchableOpacity>
@@ -60,11 +61,12 @@ class rankItem extends Component {
                 <TouchableOpacity onPress={() => { this.change('next') }} style={{ position: 'absolute', top: 100, right: 20 }}>
                     <Image source={require('../images/arrowr.png')} style={styles.arrow} />
                 </TouchableOpacity>
+
             </View>
         );
     }
 }
-
+// 
 const styles = StyleSheet.create({
     Image: { width: 205, height: 205 },
     title: { position: 'absolute', top: 20, width: 205, color: '#ffffff', textAlign: 'center', fontSize: 18, fontWeight: 'bold' },
