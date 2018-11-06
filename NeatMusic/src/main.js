@@ -4,7 +4,7 @@ import Player from './page/player';
 import ShowBar from './page/showBar';
 import TopBar from './page/topBar';
 import { Provider } from 'react-redux';
-import store from './redux/store';
+import store from './redux/store'
 
 class Main extends Component {
   render() {

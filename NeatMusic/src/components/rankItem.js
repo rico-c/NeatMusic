@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { ranking } from '../utils/api';
+import store from './redux/store';
 
 class rankItem extends Component {
     constructor(props) {
@@ -18,8 +19,7 @@ class rankItem extends Component {
             this.setState({
                 order: this.state.order !== 198 ? this.state.order + 1 : 0,
                 showImg: Object.assign({}, this.state.showImg, { uri: this.state.ranking[this.state.order !== 198 ? this.state.order + 1 : 0].al.picUrl })
-            });
-
+            }, this.play('next'));
         } else if (order == 'last') {
             this.setState({
                 order: this.state.order !== 0 ? this.state.order - 1 : 198,
@@ -27,8 +27,9 @@ class rankItem extends Component {
             })
         }
     }
-    play() {
-
+    play(action) {
+        store.dispatch(songList(this.state.ranking));
+        store.dispatch(controlPlay(action));
     }
     componentDidMount() {
         fetch(ranking)
@@ -66,11 +67,19 @@ class rankItem extends Component {
         );
     }
 }
-// 
+
+const mapStateToProps = function (store) {
+    return {
+        songList: store.songList,
+        songOrder: store.songOrder
+    };
+};
+
 const styles = StyleSheet.create({
     Image: { width: 205, height: 205 },
     title: { position: 'absolute', top: 20, width: 205, color: '#ffffff', textAlign: 'center', fontSize: 18, fontWeight: 'bold' },
     singer: { position: 'absolute', bottom: 20, width: 205, color: '#ffffff', textAlign: 'center', fontSize: 16 },
     arrow: { width: 20, height: 20 },
 })
-export default rankItem;
+
+export default connect(mapStateToProps)(rankItem);

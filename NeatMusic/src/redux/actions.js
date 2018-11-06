@@ -1,6 +1,6 @@
-export const changeSong = songId => ({
+export const changeSong = songList => ({
     type: 'CHANGE',
-    songId
+    songList
 })
 export const controlPlay = controlAction => ({
     type: 'CONTROL',

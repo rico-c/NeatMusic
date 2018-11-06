@@ -1,8 +1,34 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Video from 'react-native-video';
+import store from './redux/store';
 
 class Player extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            List: [],
+            order: 0,
+            currentSong: {}
+        }
+    }
+    getSongInfo(Id) {
+        fetch(getMusic + Id)
+            .then((res) => {
+                return res.json()
+            })
+            .then((res) => {
+                this.setState(() => ({
+                    currentSong: Object.assign({}, this.state.currentSong, { uri: res.data[0] })
+                }));
+            })
+            .catch((err) => {
+                console.error(err)
+            })
+    }
+    // componentDidMount() {
+    //     this.setState({ List: store.getState().songList })
+    // }
     render() {
         return (
             <View style={styles.wrapper}>
@@ -16,13 +42,20 @@ class Player extends Component {
                 <TouchableOpacity style={styles.button}>
                     <Image source={require('../images/next.png')} style={styles.buttonr} />
                 </TouchableOpacity>
-                <Video source={{ uri: "http://m10.music.126.net/20181106001634/236b0c174635a81739a5d4af6a702b92/ymusic/8a55/6052/91d9/0f319c5ca2f6425bd722767730b00e17.mp3" }}
+                <Video source={{ uri: this.state.currentSong.url }}
                     style={styles.backgroundVideo}
                 />
             </View>
         );
     }
 }
+
+const mapStateToProps = function (store) {
+    return {
+        songList: store.songList,
+        songOrder: store.songOrder
+    };
+};
 
 const styles = StyleSheet.create({
     wrapper: {
@@ -64,4 +97,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Player;
+export default connect(mapStateToProps)(Player);
