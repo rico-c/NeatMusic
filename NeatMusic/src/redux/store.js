@@ -8,16 +8,14 @@ const initialState = {
 const NeatMusicReducer = function (state = initialState, action) {
     switch (action.type) {
         case 'CHANGE':
-            state.songList = action.songList;
-            state.songOrder = 0;
-            return state;
+            // console.warn(action.songList)
+            return Object.assign({}, state, {
+                songList: action.songList
+            })
         case 'CONTROL':
-            if (action.controlAction === 'last') {
-                state.songOrder = state.songOrder === 0 ? state.songOrder - 1 : state.songList.length;
-            } else if (action.controlAction === 'next') {
-                state.songOrder = state.songOrder === state.songList.length ? state.songOrder + 1 : 0;
-            }
-            return state;
+            return Object.assign({}, state, {
+                songOrder: action.songOrder
+            })
         default:
             return state;
     }

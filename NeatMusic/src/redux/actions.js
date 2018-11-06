@@ -2,7 +2,7 @@ export const changeSong = songList => ({
     type: 'CHANGE',
     songList
 })
-export const controlPlay = controlAction => ({
+export const controlPlay = songOrder => ({
     type: 'CONTROL',
-    controlAction
+    songOrder
 })

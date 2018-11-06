@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Video from 'react-native-video';
-import store from './redux/store';
+import store from '../redux/store';
+import { connect } from 'react-redux';
+import { getMusic } from '../utils/api'
 
 class Player extends Component {
     constructor(props) {
@@ -9,8 +11,12 @@ class Player extends Component {
         this.state = {
             List: [],
             order: 0,
-            currentSong: {}
+            currentSong: {},
+            paused: false
         }
+    }
+    componentWillReceiveProps() {
+
     }
     getSongInfo(Id) {
         fetch(getMusic + Id)
@@ -18,21 +24,20 @@ class Player extends Component {
                 return res.json()
             })
             .then((res) => {
-                this.setState(() => ({
-                    currentSong: Object.assign({}, this.state.currentSong, { uri: res.data[0] })
-                }));
+                return res.data[0].url
             })
             .catch((err) => {
                 console.error(err)
             })
     }
-    // componentDidMount() {
-    //     this.setState({ List: store.getState().songList })
-    // }
+    componentDidMount() {
+
+    }
     render() {
         return (
             <View style={styles.wrapper}>
-                <Text>Player</Text>
+                <Text style={styles.songName}>{store.getState().songList.length > 0 ? store.getState().songList[store.getState().songOrder].name : '无歌曲'}</Text>
+                <Text style={styles.author}>{store.getState().songList.length > 0 ? store.getState().songList[store.getState().songOrder].ar[0].name : '无歌曲'}</Text>
                 <TouchableOpacity style={styles.button}>
                     <Image source={require('../images/last.png')} style={styles.buttonl} />
                 </TouchableOpacity>
@@ -42,8 +47,9 @@ class Player extends Component {
                 <TouchableOpacity style={styles.button}>
                     <Image source={require('../images/next.png')} style={styles.buttonr} />
                 </TouchableOpacity>
-                <Video source={{ uri: this.state.currentSong.url }}
+                <Video source={{ uri: store.getState().songList.length > 0 ? this.getSongInfo(store.getState().songList[store.getState().songOrder].id) : 'http://153.37.234.9/mp3.9ku.com/hot/2012/05-14/467165.mp3' }}
                     style={styles.backgroundVideo}
+                    paused={this.state.paused}
                 />
             </View>
         );
@@ -94,6 +100,14 @@ const styles = StyleSheet.create({
         right: 0,
         width: 0,
         height: 0
+    },
+    songName: {
+        fontWeight: 'bold',
+        marginLeft: 20,
+        marginTop: 5
+    },
+    author: {
+        marginLeft: 20
     }
 })
 

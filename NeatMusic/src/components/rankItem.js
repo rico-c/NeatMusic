@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { ranking } from '../utils/api';
-import store from './redux/store';
+import store from '../redux/store';
+import { connect } from 'react-redux';
+import { changeSong, controlPlay } from '../redux/actions'
 
 class rankItem extends Component {
     constructor(props) {
@@ -19,17 +21,17 @@ class rankItem extends Component {
             this.setState({
                 order: this.state.order !== 198 ? this.state.order + 1 : 0,
                 showImg: Object.assign({}, this.state.showImg, { uri: this.state.ranking[this.state.order !== 198 ? this.state.order + 1 : 0].al.picUrl })
-            }, this.play('next'));
+            }, this.play(this.state.order == this.state.ranking.length - 1 ? this.state.order + 1 : 0));
         } else if (order == 'last') {
             this.setState({
                 order: this.state.order !== 0 ? this.state.order - 1 : 198,
                 showImg: Object.assign({}, this.state.showImg, { uri: this.state.ranking[this.state.order !== 0 ? this.state.order - 1 : 198].al.picUrl })
-            })
+            }, this.play(this.state.order == 0 ? this.state.ranking.length - 1 : this.state.order - 1))
         }
     }
-    play(action) {
-        store.dispatch(songList(this.state.ranking));
-        store.dispatch(controlPlay(action));
+    play() {
+        store.dispatch(changeSong(this.state.ranking));
+        store.dispatch(controlPlay(this.state.order));
     }
     componentDidMount() {
         fetch(ranking)
