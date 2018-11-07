@@ -13,10 +13,10 @@ class showBar extends Component {
     return (
       <View style={{
         marginTop: 40,
-        marginBottom: 50,
         flex: 1,
-        flexWrap: 'wrap',
+        flexWrap: 'nowrap',
         flexDirection: 'row',
+        height: 205
       }}>
         <SingerItem ></SingerItem>
         <RankItem ></RankItem>

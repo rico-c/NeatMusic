@@ -5,16 +5,12 @@ class TopBar extends Component {
     render() {
         return (
             <View style={{
-                flex: 1,
                 flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center',
                 backgroundColor: '#ffffff',
-                position: 'absolute',
-                top: 0,
                 height: 40,
                 width: 420,
-                zIndex: 100,
             }}>
                 <View style={{ marginLeft: 15, marginRight: 15 }}>
                     <Image source={require("../images/collect.png")} style={{ width: 20, height: 20 }} />

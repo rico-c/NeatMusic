@@ -6,3 +6,8 @@ export const controlPlay = songOrder => ({
     type: 'CONTROL',
     songOrder
 })
+export const songId = songId => ({
+    type: 'ID',
+    songId
+})
+
