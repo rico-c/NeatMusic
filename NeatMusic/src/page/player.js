@@ -16,30 +16,30 @@ class Player extends Component {
         }
     }
     componentWillReceiveProps() {
-
     }
-    getSongInfo(Id) {
+    componentDidMount() {
+    }
+    render() {
+        let vedio = null;
+        let Id = store.getState().songId;
+        // 怀疑是render异步数据问题，下次把获取mp3地址的操作步骤转义至 comment组件中进行
         fetch(getMusic + Id)
             .then((res) => {
                 return res.json()
             })
             .then((res) => {
                 if (store.getState().songList.length > 0) {
-                    console.warn('yes' + res.data[0].url);
-                    return { uri: res.data[0].url }
+                    // console.warn('yes' + res.data[0].url);
+                    vedio = <Video source={{ uri: res.data[0].url }}></Video>
                 } else {
-                    console.warn('no');
-                    return { uri: 'http://m10.music.126.net/20181108011932/ae7850a9bfabb8c63502cc2eb315c27a/ymusic/010a/18ce/8053/950351f869e8d365dfbdbc8c901c337f.mp3' }
+                    // console.warn('no');
+                    vedio = <Video source={{ uri: 'http://m10.music.126.net/20181108011932/ae7850a9bfabb8c63502cc2eb315c27a/ymusic/010a/18ce/8053/950351f869e8d365dfbdbc8c901c337f.mp3' }}></Video>
                 }
             })
             .catch((err) => {
                 console.error(err)
             })
-    }
-    componentDidMount() {
 
-    }
-    render() {
         return (
             <View style={styles.wrapper}>
                 <Text style={styles.songName}>{store.getState().songList.length > 0 ? store.getState().songList[store.getState().songOrder].name : '无歌曲'}</Text>
@@ -47,11 +47,13 @@ class Player extends Component {
                 <TouchableOpacity style={styles.button}>
                     <Image source={require('../images/start.png')} style={styles.button} />
                 </TouchableOpacity>
-                <Video
-                    source={this.getSongInfo(store.getState().songId)}
-                // style={styles.backgroundVideo}
-                // paused={this.state.paused}
-                />
+                {vedio}
+                {/* <Video source={{ uri: 'http://m10.music.126.net/20181108011932/ae7850a9bfabb8c63502cc2eb315c27a/ymusic/010a/18ce/8053/950351f869e8d365dfbdbc8c901c337f.mp3' }}></Video> */}
+                {/* <Video
+                    source={getSongInfo()} */}
+                {/* // style={styles.backgroundVideo}
+                // paused={this.state.paused} */}
+                {/* /> */}
             </View>
         );
     }
