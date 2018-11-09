@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import Video from 'react-native-video';
 import store from '../redux/store';
 import { connect } from 'react-redux';
-import { getMusic } from '../utils/api'
+import { getMusic } from '../utils/api';
+import Sound from 'react-native-sound';
 
 class Player extends Component {
     constructor(props) {
@@ -15,8 +15,16 @@ class Player extends Component {
             paused: false,
             uri: { uri: '' },
             playInBackground: true,
-            paused: false
-        }
+        };
+
+        this.whoosh = new Sound('http://win.web.nf01.sycdn.kuwo.cn/resource/n2/32/9/1118410983.mp3', Sound.MAIN_BUNDLE, (error) => {
+            if (error) {
+                console.log('failed to load the sound', error);
+                return;
+            }
+            this.whoosh.setVolume(1);
+            this.whoosh.play();
+        });
     }
     componentWillReceiveProps() {
         let Id = store.getState().songId;
@@ -34,22 +42,23 @@ class Player extends Component {
                 console.error(err)
             })
     }
+    componentDidMount() {
+
+    }
+    play() {
+        this.whoosh.release();
+    }
     pause() {
-        this.setState({ paused: !this.state.paused })
+
     }
     render() {
         return (
             <View style={styles.wrapper}>
                 <Text style={styles.songName}>{store.getState().songList.length > 0 ? store.getState().songList[store.getState().songOrder].name : '无歌曲'}</Text>
                 <Text style={styles.author}>{store.getState().songList.length > 0 ? store.getState().songList[store.getState().songOrder].ar[0].name : '无歌曲'}</Text>
-                <TouchableOpacity style={styles.button} onPress={() => { this.pause() }} >
+                <TouchableOpacity style={styles.button} onPress={() => { this.play() }} >
                     <Image source={require('../images/start.png')} style={styles.button} />
                 </TouchableOpacity>
-                <Video
-                    source={this.state.uri}
-                    style={styles.backgroundVideo}
-                    playInBackground={this.state.playInBackground}
-                />
             </View>
         );
     }

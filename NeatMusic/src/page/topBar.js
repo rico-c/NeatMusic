@@ -14,7 +14,7 @@ class TopBar extends Component {
             }}>
                 <View style={{ marginLeft: 15, marginRight: 15 }}>
                     <Image source={require("../images/collect.png")} style={{ width: 20, height: 20 }} />
-                    <Text style={{ fontSize: 10 }}>收藏</Text>
+                    <Text style={{ fontSize: 10 }}>收藏1</Text>
                 </View>
                 <View style={{ marginLeft: 15, marginRight: 15 }}>
                     <Image source={require("../images/me.png")} style={{ width: 20, height: 20 }} />
