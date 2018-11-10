@@ -12,53 +12,65 @@ class Player extends Component {
             List: [],
             order: 0,
             currentSong: {},
-            paused: false,
-            uri: { uri: '' },
+            playing: false,
+            uri: '',
             playInBackground: true,
         };
-
-        this.whoosh = new Sound('http://win.web.nf01.sycdn.kuwo.cn/resource/n2/32/9/1118410983.mp3', Sound.MAIN_BUNDLE, (error) => {
-            if (error) {
-                console.log('failed to load the sound', error);
-                return;
-            }
-            this.whoosh.setVolume(1);
-            this.whoosh.play();
-        });
+        this.whoosh = {};
     }
     componentWillReceiveProps() {
         let Id = store.getState().songId;
-        // 怀疑是render异步数据问题，下次把获取mp3地址的操作步骤转义至 comment组件中进行
         fetch(getMusic + Id)
             .then((res) => {
                 return res.json()
             })
             .then((res) => {
                 this.setState(() => ({
-                    uri: Object.assign({}, this.state.uri, { uri: res.data[0].url })
-                }));
+                    uri: res.data[0].url
+                }), () => {
+                    if (this.whoosh.release) { this.whoosh.release() };
+                    this.whoosh = new Sound(this.state.uri, Sound.MAIN_BUNDLE, (error) => {
+                        if (error) {
+                            console.log('failed to load the sound', error);
+                            return;
+                        }
+                        this.whoosh.setVolume(1);
+                        this.whoosh.play();
+                        this.setState({ playing: true })
+                    });
+                });
             })
             .catch((err) => {
                 console.error(err)
             })
     }
-    componentDidMount() {
-
-    }
-    play() {
-        this.whoosh.release();
+    componentWillUnmount() {
+        // this.whoosh.release();
     }
     pause() {
-
+        this.whoosh.pause();
+        this.setState({ playing: false })
+    }
+    play() {
+        if (this.whoosh.play) {
+            this.whoosh.play();
+            this.setState({ playing: true })
+        }
     }
     render() {
         return (
             <View style={styles.wrapper}>
-                <Text style={styles.songName}>{store.getState().songList.length > 0 ? store.getState().songList[store.getState().songOrder].name : '无歌曲'}</Text>
-                <Text style={styles.author}>{store.getState().songList.length > 0 ? store.getState().songList[store.getState().songOrder].ar[0].name : '无歌曲'}</Text>
-                <TouchableOpacity style={styles.button} onPress={() => { this.play() }} >
-                    <Image source={require('../images/start.png')} style={styles.button} />
-                </TouchableOpacity>
+                <Text style={styles.songName}>{store.getState().songList.length > 0 ? store.getState().songList[store.getState().songOrder].name : '点击下一条评论'}</Text>
+                <Text style={styles.author}>{store.getState().songList.length > 0 ? store.getState().songList[store.getState().songOrder].ar[0].name : '开始播放歌曲'}</Text>
+                {this.state.playing ? (
+                    <TouchableOpacity style={styles.button} onPress={() => { this.pause() }} >
+                        <Image source={require('../images/pause.png')} style={styles.button} />
+                    </TouchableOpacity>
+                ) : (
+                        <TouchableOpacity style={styles.button} onPress={() => { this.play() }} >
+                            <Image source={require('../images/start.png')} style={styles.button} />
+                        </TouchableOpacity>
+                    )}
             </View>
         );
     }

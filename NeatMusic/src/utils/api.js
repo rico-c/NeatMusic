@@ -28,4 +28,6 @@ export const hotComment = _api + '/comment/hot?type=0&id='
 // 歌单分类
 export const songCate = _api + '/playlist/catlist';
 // 获取音乐
-export const getMusic = _api + '/song/url?br=320000&id='
+export const getMusic = _api + '/song/url?br=320000&id=';
+// 获取歌词
+export const lyric = _api + '/lyric?id=';
