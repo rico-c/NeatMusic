@@ -5,7 +5,7 @@ import store from '../redux/store';
 import { connect } from 'react-redux';
 import { changeSong, controlPlay, songId } from '../redux/actions'
 
-class rankItem extends Component {
+class Comment extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -136,4 +136,4 @@ const styles = StyleSheet.create({
     whiteArrow: { width: 0, height: 0, borderWidth: 10, borderLeftColor: '#ffffff', borderTopColor: '#ffffff', borderRightColor: 'transparent', borderBottomColor: 'transparent', position: 'absolute', bottom: -14, left: 0 }
 })
 
-export default connect(mapStateToProps)(rankItem);
+export default connect(mapStateToProps)(Comment);
