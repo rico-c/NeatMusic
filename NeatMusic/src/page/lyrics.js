@@ -12,7 +12,7 @@ class Lrc extends Component {
             lrc: ''
         }
     }
-    componentDidMount() {
+    componentWillReceiveProps() {
         let Id = store.getState().songId;
         fetch(lyric + Id)
             .then((res) => {
@@ -25,8 +25,9 @@ class Lrc extends Component {
     render() {
         return (
             <View style={styles.commentwrap}>
-                <ScrollView styles={styles.scroll}>
-                    <Text>{this.state.lrc}</Text>
+                {/* <Image source={require("../images/lrcbg.jpeg")} style={styles.Image} blurRadius={1} /> */}
+                <ScrollView style={styles.scroll}>
+                    <Text style={styles.lrc}>{this.state.lrc.replace(/\[[^\[^\]]*\]/g, '')}</Text>
                 </ScrollView>
             </View>
         );
@@ -43,7 +44,9 @@ const mapStateToProps = function (store) {
 
 const styles = StyleSheet.create({
     commentwrap: { height: 617 },
-    scroll: { height: 617 }
+    scroll: { height: 617, paddingLeft: 10, paddingRight: 10 },
+    lrc: { fontSize: 18, lineHeight: 30, color: 'white', fontStyle: 'italic', backgroundColor: '#000000', marginTop: 10 },
+    // Image: { width: 412, height: 617 },
 })
 
 export default connect(mapStateToProps)(Lrc);

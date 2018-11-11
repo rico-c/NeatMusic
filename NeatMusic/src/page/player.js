@@ -37,14 +37,14 @@ class Player extends Component {
                             return;
                         }
                         this.whoosh.setVolume(1);
-                        // this.whoosh.setNumberOfLoops(-1);
+                        this.whoosh.setNumberOfLoops(-1);
                         // 播放完成后的回调，当Loops为无限时不会触发
                         this.whoosh.play((success) => {
                             if (success) {
                                 console.warn('successfully finished playing');
                             } else {
-                                console.warn('playback failed due to audio decoding errors');
-                                whoosh.reset();
+                                // console.warn('playback failed due to audio decoding errors');
+                                this.whoosh.reset();
                             }
                         });
                         this.setState({ playing: true })
@@ -68,7 +68,7 @@ class Player extends Component {
                 if (success) {
                     console.warn('successfully finished playing');
                 } else {
-                    console.warn('playback failed due to audio decoding errors');
+                    // console.warn('playback failed due to audio decoding errors');
                     this.whoosh.reset();
                 }
             });
