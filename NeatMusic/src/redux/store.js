@@ -3,7 +3,8 @@ import { createStore } from 'redux';
 const initialState = {
     songOrder: 0,
     songList: [],
-    songId: ''
+    songId: '',
+    songName: ''
 }
 
 const NeatMusicReducer = function (state = initialState, action) {
@@ -19,6 +20,10 @@ const NeatMusicReducer = function (state = initialState, action) {
         case 'ID':
             return Object.assign({}, state, {
                 songId: action.songId
+            })
+        case 'NAME':
+            return Object.assign({}, state, {
+                songName: action.songName
             })
         default:
             return state;

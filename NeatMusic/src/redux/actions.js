@@ -10,4 +10,8 @@ export const songId = songId => ({
     type: 'ID',
     songId
 })
+export const songName = songName => ({
+    type: 'NAME',
+    songName
+})
 

@@ -45,7 +45,7 @@ const mapStateToProps = function (store) {
 const styles = StyleSheet.create({
     commentwrap: { height: 617 },
     scroll: { height: 617, paddingLeft: 10, paddingRight: 10 },
-    lrc: { fontSize: 18, lineHeight: 30, color: 'white', fontStyle: 'italic', backgroundColor: '#000000', marginTop: 10 },
+    lrc: { fontSize: 18, lineHeight: 40, fontStyle: 'italic', textAlign: 'center' },
     // Image: { width: 412, height: 617 },
 })
 

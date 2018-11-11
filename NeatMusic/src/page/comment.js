@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { pop, listDetail, classical, rock, hiphop, hotComment } from '../utils/api';
 import store from '../redux/store';
 import { connect } from 'react-redux';
-import { changeSong, controlPlay, songId } from '../redux/actions'
+import { changeSong, controlPlay, songId, songName } from '../redux/actions'
 
 class Comment extends Component {
     constructor(props) {
@@ -47,6 +47,7 @@ class Comment extends Component {
         store.dispatch(changeSong(this.state.ranking));
         store.dispatch(controlPlay(this.state.order));
         store.dispatch(songId(this.state.songId));
+        store.dispatch(songName(this.state.ranking[this.state.order].name));
     }
     // 获取评论
     getComment() {
@@ -103,8 +104,8 @@ class Comment extends Component {
                     <Text style={styles.type}>流行</Text>
                     <View style={styles.redBg}>
                         <View style={styles.comment}>
-                            <Text style={styles.comment_content}> {this.state.comment ? this.state.comment : '外婆得了阿尔茨海默病，每天就在床上坐着,看着床头上已故外公的照片，有一天她突然问我，这个人是谁，我能嫁给他吗？'}</Text>
-                            <Text style={styles.comment_info}> 来自网易云音乐用户 {this.state.commentWriter ? this.state.commentWriter : '后海大草鱼'} 在 《{this.state.ranking.length >= 1 ? this.state.ranking[this.state.order].name : ''}》下的评论 </Text>
+                            <Text style={styles.comment_content}> {this.state.comment ? this.state.comment : '在NeatMusic中发现有趣的评论'}</Text>
+                            <Text style={styles.comment_info}>来自网易云音乐用户 {this.state.commentWriter ? this.state.commentWriter : 'RicoFishing'} 在 《{this.state.ranking.length >= 1 ? this.state.ranking[this.state.order].name : ''}》下的评论 </Text>
                             <View style={styles.redArrow}></View>
                             <View style={styles.whiteArrow}></View>
                         </View>
@@ -118,7 +119,8 @@ class Comment extends Component {
 const mapStateToProps = function (store) {
     return {
         songList: store.songList,
-        songOrder: store.songOrder
+        songOrder: store.songOrder,
+        songName: store.songName
     };
 };
 
