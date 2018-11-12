@@ -12,7 +12,7 @@ class Comment extends Component {
             ranking: [],
             order: 0,
             type: 'pop',
-            songId: '',
+            songId: Number,
             showImg: {
                 uri: 'https://facebook.github.io/react/logo-og.png'
             },
@@ -86,6 +86,13 @@ class Comment extends Component {
             .catch((err) => {
                 console.warn(err)
             })
+    }
+    componentWillReceiveProps() {
+        this.setState({
+            songId: store.getState().songId,
+        }, () => {
+            this.getComment()
+        })
     }
     componentDidMount() {
         this.getPlayList()
