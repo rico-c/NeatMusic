@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage, ScrollView } from 'react-native';
 import { } from '../utils/api';
 import store from '../redux/store';
 import { connect } from 'react-redux';
@@ -10,7 +10,7 @@ class Collect extends Component {
         super(props);
         this.state = {
             collect: [],
-            Id: Number,
+            Id: 0,
             songName: '',
             showAdd: true
         };
@@ -41,8 +41,8 @@ class Collect extends Component {
         })
     }
     play(Id) {
+        console.warn(Id)
         store.dispatch(songId(this.state.Id));
-        store.dispatch(songName(this.state.songName));
     }
     render() {
         let collectList = this.state.collect.map((item, index) =>
@@ -56,10 +56,10 @@ class Collect extends Component {
         )
         return (
             <View style={styles.commentwrap}>
-                <View style={styles.collectList}>
+                <ScrollView style={styles.collectList}>
                     {collectList}
-                </View>
-                {JSON.stringify(this.state.collect).indexOf(this.state.Id) !== -1 ? null :
+                </ScrollView>
+                {JSON.stringify(this.state.collect).indexOf(this.state.Id) !== -1 || this.state.Id == 0 ? null :
                     <View style={styles.askToAdd}>
                         <Text style={styles.askText}>将当前歌曲添加到收藏列表？</Text>
                         <View style={styles.twoBtn}>

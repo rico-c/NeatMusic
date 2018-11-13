@@ -12,7 +12,7 @@ class Comment extends Component {
             ranking: [],
             order: 0,
             type: 'pop',
-            songId: Number,
+            songId: 0,
             showImg: {
                 uri: 'https://facebook.github.io/react/logo-og.png'
             },
