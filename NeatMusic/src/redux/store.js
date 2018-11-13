@@ -18,9 +18,6 @@ const NeatMusicReducer = function (state = initialState, action) {
                 songOrder: action.songOrder
             })
         case 'ID':
-            console.warn('upstore1');
-            console.warn(action.songId);
-            console.warn('upstore2');
             return Object.assign({}, state, {
                 songId: action.songId
             })

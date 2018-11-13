@@ -18,7 +18,8 @@ class Comment extends Component {
             },
             comment: '',
             commentWriter: '',
-        }
+        };
+        this.getComment = this.getComment.bind(this);
     }
     // 切歌
     change(order) {
@@ -50,8 +51,9 @@ class Comment extends Component {
         store.dispatch(songName(this.state.ranking[this.state.order].name));
     }
     // 获取评论
-    getComment() {
-        fetch(hotComment + this.state.songId)
+    getComment(Id) {
+        let songId = Id ? Id : this.state.songId;
+        fetch(hotComment + songId)
             .then((res) => {
                 return res.json()
             })
@@ -87,13 +89,10 @@ class Comment extends Component {
                 console.warn(err)
             })
     }
-    componentDidUpdate() {
-        console.warn('upplayer');
-        this.setState({
-            songId: store.getState().songId
-        }, () => {
-            this.getComment()
-        })
+    componentWillReceiveProps() {
+        if (store.getState().songId) {
+            this.getComment(store.getState().songId)
+        }
     }
     componentDidMount() {
         this.getPlayList()
