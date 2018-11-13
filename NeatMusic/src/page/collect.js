@@ -41,8 +41,7 @@ class Collect extends Component {
         })
     }
     play(Id) {
-        console.warn(Id)
-        store.dispatch(songId(this.state.Id));
+        store.dispatch(songId(Id));
     }
     render() {
         let collectList = this.state.collect.map((item, index) =>

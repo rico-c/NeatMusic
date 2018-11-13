@@ -20,6 +20,7 @@ class Player extends Component {
         this.whoosh = {};
     }
     componentWillReceiveProps() {
+        console.warn('upplayer');
         let Id = store.getState().songId;
         fetch(getMusic + Id)
             .then((res) => {

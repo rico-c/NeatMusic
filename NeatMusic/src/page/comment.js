@@ -87,9 +87,10 @@ class Comment extends Component {
                 console.warn(err)
             })
     }
-    componentWillReceiveProps() {
+    componentDidUpdate() {
+        console.warn('upplayer');
         this.setState({
-            songId: store.getState().songId,
+            songId: store.getState().songId
         }, () => {
             this.getComment()
         })
