@@ -20,7 +20,6 @@ class Player extends Component {
         this.whoosh = {};
     }
     componentWillReceiveProps() {
-        console.warn('upplayer');
         let Id = store.getState().songId;
         fetch(getMusic + Id)
             .then((res) => {
@@ -42,7 +41,7 @@ class Player extends Component {
                         // 播放完成后的回调，当Loops为无限时不会触发
                         this.whoosh.play((success) => {
                             if (success) {
-                                console.warn('successfully finished playing');
+                                // console.warn('successfully finished playing');
                             } else {
                                 // console.warn('playback failed due to audio decoding errors');
                                 this.whoosh.reset();
@@ -67,7 +66,7 @@ class Player extends Component {
         if (this.whoosh.play) {
             this.whoosh.play((success) => {
                 if (success) {
-                    console.warn('successfully finished playing');
+                    // console.warn('successfully finished playing');
                 } else {
                     // console.warn('playback failed due to audio decoding errors');
                     this.whoosh.reset();
@@ -98,8 +97,8 @@ class Player extends Component {
         return (
             <View style={styles.wrapper}>
                 <View>
-                    <Text style={styles.songName}>{store.getState().songList.length > 0 ? store.getState().songList[store.getState().songOrder].name : '点击下一条评论'}</Text>
-                    <Text style={styles.author}>{store.getState().songList.length > 0 ? store.getState().songList[store.getState().songOrder].ar[0].name : '开始播放歌曲'}</Text>
+                    <Text style={styles.songName}>{store.getState().songName ? store.getState().songName : '点击下一条评论'}</Text>
+                    <Text style={styles.author}>{store.getState().singerName ? store.getState().singerName : '开始播放歌曲'}</Text>
                 </View>
                 <View style={styles.btn}>
                     {this.state.singleLoop ? (
@@ -130,7 +129,8 @@ const mapStateToProps = function (store) {
     return {
         songList: store.songList,
         songOrder: store.songOrder,
-        songId: store.songId
+        songId: store.songId,
+        singerName: store.singerName
     };
 };
 

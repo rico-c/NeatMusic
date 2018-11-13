@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { pop, listDetail, classical, rock, hiphop, hotComment } from '../utils/api';
+import { pop, listDetail, classical, rock, hiphop, hotComment, west, japan, minyao, metal, punk, eng } from '../utils/api';
 import store from '../redux/store';
 import { connect } from 'react-redux';
-import { changeSong, controlPlay, songId, songName } from '../redux/actions'
+import { changeSong, controlPlay, songId, songName, singerName } from '../redux/actions'
 
 class Comment extends Component {
     constructor(props) {
@@ -20,6 +20,53 @@ class Comment extends Component {
             commentWriter: '',
         };
         this.getComment = this.getComment.bind(this);
+        this.typeList = [
+            {
+                name: '流行',
+                api: 'pop'
+            },
+            {
+                name: '经典',
+                api: 'classical'
+            },
+            {
+                name: '摇滚',
+                api: 'rock'
+            },
+            {
+                name: '嘻哈',
+                api: 'hiphop'
+            },
+            {
+                name: '欧美',
+                api: 'west'
+            },
+            {
+                name: '日语',
+                api: 'japan'
+            },
+            {
+                name: '民谣',
+                api: 'minyao'
+            },
+            {
+                name: '金属',
+                api: 'metal'
+            },
+            {
+                name: '朋克',
+                api: 'punk'
+            },
+            {
+                name: '英伦',
+                api: 'eng'
+            },
+
+        ]
+    }
+    // 切换歌曲列表
+    changeType(api) {
+        this.getPlayList(api)
     }
     // 切歌
     change(order) {
@@ -49,6 +96,7 @@ class Comment extends Component {
         store.dispatch(controlPlay(this.state.order));
         store.dispatch(songId(this.state.songId));
         store.dispatch(songName(this.state.ranking[this.state.order].name));
+        store.dispatch(singerName(this.state.ranking[this.state.order].ar[0].name));
     }
     // 获取评论
     getComment(Id) {
@@ -68,8 +116,43 @@ class Comment extends Component {
             })
     }
     // 获取播放列表
-    getPlayList() {
-        fetch(pop)
+    getPlayList(type = 'pop') {
+        let api;
+        switch (type) {
+            case 'pop':
+                api = pop;
+                break;
+            case 'classical':
+                api = classical;
+                break;
+            case 'rock':
+                api = rock;
+                break;
+            case 'hiphop':
+                api = hiphop;
+                break;
+            case 'west':
+                api = west;
+                break;
+            case 'japan':
+                api = japan;
+                break;
+            case 'minyao':
+                api = minyao;
+                break;
+            case 'metal':
+                api = metal;
+                break;
+            case 'punk':
+                api = punk;
+                break;
+            case 'eng':
+                api = eng;
+                break;
+            default:
+                break;
+        }
+        fetch(api)
             .then((res) => {
                 return res.json()
             })
@@ -108,7 +191,20 @@ class Comment extends Component {
                     <Image source={require('../images/arrowr.png')} style={styles.arrow} />
                 </TouchableOpacity>
                 <View style={styles.Bg}>
-                    <Text style={styles.type}>流行</Text>
+                    {/* <View style={styles.type}>
+                        <TouchableOpacity>
+                            <Text style={styles.curentType}>流行</Text>
+                        </TouchableOpacity>
+                    </View> */}
+                    <View style={styles.moreType}>
+                        {
+                            this.typeList.map((item) =>
+                                <TouchableOpacity onPress={() => { this.changeType(item.api) }}>
+                                    <Text style={styles.moreTypeItem}>{item.name}</Text>
+                                </TouchableOpacity>
+                            )
+                        }
+                    </View>
                     <View style={styles.redBg}>
                         <View style={styles.comment}>
                             <Text style={styles.comment_content}> {this.state.comment ? this.state.comment : '在NeatMusic中发现有趣的评论'}</Text>
@@ -127,13 +223,17 @@ const mapStateToProps = function (store) {
     return {
         songList: store.songList,
         songOrder: store.songOrder,
-        songName: store.songName
+        songName: store.songName,
+        singerName: store.singerName
     };
 };
 
 const styles = StyleSheet.create({
     commentwrap: { position: 'relative' },
-    type: { color: 'white', position: 'absolute', top: 30, backgroundColor: 'black', padding: 8 },
+    type: { position: 'absolute', top: 30, backgroundColor: 'black', padding: 8 },
+    curentType: { color: 'white', },
+    moreType: { flexDirection: 'row', position: 'absolute', top: 30, width: 250, flexWrap: 'wrap' },
+    moreTypeItem: { backgroundColor: 'black', color: 'white', padding: 8, margin: 3 },
     Image: { width: 412, height: 617 },
     arrow: { width: 20, height: 20 },
     Bg: { width: 280, height: 617, position: "absolute", left: 75, top: 0, justifyContent: "center", alignItems: "center" },

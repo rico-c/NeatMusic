@@ -14,4 +14,7 @@ export const songName = songName => ({
     type: 'NAME',
     songName
 })
-
+export const singerName = singerName => ({
+    type: 'SINGER',
+    singerName
+})

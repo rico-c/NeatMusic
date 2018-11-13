@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage, ScrollVi
 import { } from '../utils/api';
 import store from '../redux/store';
 import { connect } from 'react-redux';
-import { changeSong, controlPlay, songId, songName } from '../redux/actions'
+import { changeSong, controlPlay, songId, songName, singerName } from '../redux/actions'
 
 class Collect extends Component {
     constructor(props) {
@@ -12,15 +12,18 @@ class Collect extends Component {
             collect: [],
             Id: 0,
             songName: '',
-            showAdd: true
+            showAdd: true,
+            singer: ''
         };
     }
     componentWillReceiveProps() {
         let Id = store.getState().songId;
         let songName = store.getState().songName;
+        let singer = store.getState().singerName;
         this.setState({
             Id: Id,
-            songName: songName
+            songName: songName,
+            singer: singer
         })
     }
     componentDidMount() {
@@ -34,18 +37,21 @@ class Collect extends Component {
         let newCollect = {};
         newCollect.Id = this.state.Id;
         newCollect.songName = this.state.songName;
+        newCollect.singer = this.state.singer;
         this.setState({
             collect: [...this.state.collect, newCollect]
         }, async () => {
             await AsyncStorage.setItem('collect', JSON.stringify(this.state.collect))
         })
     }
-    play(Id) {
+    play(Id, Name, author) {
         store.dispatch(songId(Id));
+        store.dispatch(songName(Name));
+        store.dispatch(singerName(author));
     }
     render() {
         let collectList = this.state.collect.map((item, index) =>
-            <TouchableOpacity style={styles.wrapper} onPress={() => { this.play(item.Id) }}>
+            <TouchableOpacity style={styles.wrapper} onPress={() => { this.play(item.Id, item.songName, item.singer) }} key={item.songName + index}>
                 <View style={styles.collectName}>
                     <Text style={styles.collectIndex}>{index + 1}</Text><Text style={styles.collectItem}>{item.songName}</Text>
                 </View>
@@ -81,7 +87,8 @@ const mapStateToProps = function (store) {
         songList: store.songList,
         songOrder: store.songOrder,
         songId: store.songId,
-        songName: store.songName
+        songName: store.songName,
+        singerName: store.singerName
     };
 };
 

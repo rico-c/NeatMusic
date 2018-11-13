@@ -20,6 +20,18 @@ export const rock = _api + '/top/playlist?cat=摇滚&limit=1'
 export const pop = _api + '/top/playlist?cat=流行&limit=1'
 // 嘻哈
 export const hiphop = _api + '/top/playlist?cat=说唱&limit=1'
+// 欧美
+export const west = _api + '/top/playlist?cat=欧美&limit=1'
+// 日语
+export const japan = _api + '/top/playlist?cat=日语&limit=1'
+// 民谣
+export const minyao = _api + '/top/playlist?cat=民谣&limit=1'
+// 金属
+export const metal = _api + '/top/playlist?cat=金属&limit=1'
+// 朋克
+export const punk = _api + '/top/playlist?cat=朋克&limit=1'
+// 英伦
+export const eng = _api + '/top/playlist?cat=英伦&limit=1'
 
 // 播放列表详情
 export const listDetail = _api + '/playlist/detail?id='

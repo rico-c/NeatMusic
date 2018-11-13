@@ -4,7 +4,8 @@ const initialState = {
     songOrder: 0,
     songList: [],
     songId: '',
-    songName: ''
+    songName: '',
+    singerName: ''
 }
 
 const NeatMusicReducer = function (state = initialState, action) {
@@ -24,6 +25,10 @@ const NeatMusicReducer = function (state = initialState, action) {
         case 'NAME':
             return Object.assign({}, state, {
                 songName: action.songName
+            })
+        case 'SINGER':
+            return Object.assign({}, state, {
+                singerName: action.singerName
             })
         default:
             return state;
