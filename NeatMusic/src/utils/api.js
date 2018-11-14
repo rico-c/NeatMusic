@@ -1,4 +1,4 @@
-const _api = 'http://10.0.2.2:3000';
+const _api = 'https://www.mptab.cn:3001';
 
 // 歌手分类列表
 export const singerCate = _api + '/artist/list';
