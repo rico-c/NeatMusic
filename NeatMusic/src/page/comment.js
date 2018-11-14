@@ -18,6 +18,8 @@ class Comment extends Component {
             },
             comment: '',
             commentWriter: '',
+            type: '流行',
+            hideMore: true
         };
         this.getComment = this.getComment.bind(this);
         this.typeList = [
@@ -64,9 +66,18 @@ class Comment extends Component {
 
         ]
     }
+    toggleMore() {
+        this.setState({
+            hideMore: !this.state.hideMore
+        })
+    }
     // 切换歌曲列表
-    changeType(api) {
-        this.getPlayList(api)
+    changeType(api, name) {
+        this.getPlayList(api);
+        this.setState({
+            type: name
+        })
+        this.toggleMore()
     }
     // 切歌
     change(order) {
@@ -181,6 +192,11 @@ class Comment extends Component {
         this.getPlayList()
     }
     render() {
+        let moreTypeBtn = this.typeList.map((item) =>
+            <TouchableOpacity onPress={() => { this.changeType(item.api, item.name) }} key={item.api}>
+                <Text style={styles.moreTypeItem}>{item.name}</Text>
+            </TouchableOpacity>
+        )
         return (
             <View style={styles.commentwrap}>
                 <Image source={this.state.showImg} style={styles.Image} blurRadius={5} />
@@ -191,19 +207,13 @@ class Comment extends Component {
                     <Image source={require('../images/arrowr.png')} style={styles.arrow} />
                 </TouchableOpacity>
                 <View style={styles.Bg}>
-                    {/* <View style={styles.type}>
-                        <TouchableOpacity>
-                            <Text style={styles.curentType}>流行</Text>
+                    <View style={styles.type}>
+                        <TouchableOpacity onPress={() => { this.toggleMore() }}>
+                            <Text style={styles.curentType}> {this.state.type} </Text>
                         </TouchableOpacity>
-                    </View> */}
+                    </View>
                     <View style={styles.moreType}>
-                        {
-                            this.typeList.map((item) =>
-                                <TouchableOpacity onPress={() => { this.changeType(item.api) }}>
-                                    <Text style={styles.moreTypeItem}>{item.name}</Text>
-                                </TouchableOpacity>
-                            )
-                        }
+                        {this.state.hideMore ? null : moreTypeBtn}
                     </View>
                     <View style={styles.redBg}>
                         <View style={styles.comment}>
@@ -232,7 +242,7 @@ const styles = StyleSheet.create({
     commentwrap: { position: 'relative' },
     type: { position: 'absolute', top: 30, backgroundColor: 'black', padding: 8 },
     curentType: { color: 'white', },
-    moreType: { flexDirection: 'row', position: 'absolute', top: 30, width: 250, flexWrap: 'wrap' },
+    moreType: { flexDirection: 'row', position: 'absolute', top: 27, width: 250, flexWrap: 'wrap' },
     moreTypeItem: { backgroundColor: 'black', color: 'white', padding: 8, margin: 3 },
     Image: { width: 412, height: 617 },
     arrow: { width: 20, height: 20 },

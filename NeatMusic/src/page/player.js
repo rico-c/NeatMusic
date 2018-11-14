@@ -4,6 +4,7 @@ import store from '../redux/store';
 import { connect } from 'react-redux';
 import { getMusic } from '../utils/api';
 import Sound from 'react-native-sound';
+import { changeSong, controlPlay, songId, songName, singerName } from '../redux/actions';
 
 class Player extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class Player extends Component {
             playing: false,
             uri: '',
             playInBackground: true,
-            singleLoop: false
+            singleLoop: true
         };
         this.whoosh = {};
     }
@@ -41,9 +42,8 @@ class Player extends Component {
                         // 播放完成后的回调，当Loops为无限时不会触发
                         this.whoosh.play((success) => {
                             if (success) {
-                                // console.warn('successfully finished playing');
+                                store.dispatch(controlPlay(store.getState().songOrder + 1));
                             } else {
-                                // console.warn('playback failed due to audio decoding errors');
                                 this.whoosh.reset();
                             }
                         });
