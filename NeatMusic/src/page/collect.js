@@ -28,6 +28,7 @@ class Collect extends Component {
     }
     componentDidMount() {
         AsyncStorage.getItem('collect', (error, result) => {
+            if (!result) { return }
             this.setState({
                 collect: [...this.state.collect, ...JSON.parse(result)]
             })
