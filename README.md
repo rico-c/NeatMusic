@@ -1,10 +1,10 @@
-<p align="center"><img width="100px" src="http://www.mptab.cn/img/neatmusicicon.png"></p>
+<img align="center" width="100px" src="http://www.mptab.cn/img/neatmusicicon.png">
 <p align="center">
   <img src="https://img.shields.io/circleci/project/github/vuejs/vue/dev.svg" alt="Build Status">
   <a href="https://npmcharts.com/compare/vue?minimal=true"><img src="https://img.shields.io/npm/dm/vue.svg" alt="Downloads"></a>
   <br>
 </p>
-<h2 align="center">NeatMusic</h2>
+<h1 align="center">NeatMusic</h1>
 
 ### 介绍
 NeatMusic是一款基于ReactNative搭建的热门音乐评论推荐应用，每天更新流行、摇滚、嘻哈等10大热门分类下的推荐热门评论,数据接口来源于网易第三方API<a href="https://github.com/Binaryify/NeteaseCloudMusicApi">NeteaseCloudMusicApi</a>。
