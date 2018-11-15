@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import store from '../redux/store';
 import { connect } from 'react-redux';
 import { getMusic } from '../utils/api';
@@ -140,9 +140,9 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         position: 'absolute',
-        bottom: 0,
+        bottom: 25,
         height: 50,
-        width: 420,
+        width: Dimensions.get('window').width,
         backgroundColor: '#ffffff',
         justifyContent: 'space-between',
         flexDirection: 'row',

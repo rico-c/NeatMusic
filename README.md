@@ -1,10 +1,12 @@
-<p align="center"><img width="100px" src="http://www.mptab.cn/img/neatmusicicon.png"></p>
+<center>
+  <img width="100px" src="http://www.mptab.cn/img/neatmusicicon.png">
+  </center>
 <p align="center">
   <img src="https://img.shields.io/circleci/project/github/vuejs/vue/dev.svg" alt="Build Status">
-  <a href="https://npmcharts.com/compare/vue?minimal=true"><img src="https://img.shields.io/npm/dm/vue.svg" alt="Downloads"></a>
+  <a href="https://github.com/RicardoCao-Biker/NeatMusic/releases/download/v1.0/NeatMusic-0.08.apk"><img src="https://img.shields.io/npm/dm/vue.svg" alt="Downloads"></a>
   <br>
 </p>
-<h2 align="center">NeatMusic</h2>
+<h1 align="center">NeatMusic</h1>
 
 ### 介绍
 NeatMusic是一款基于ReactNative搭建的热门音乐评论推荐应用，每天更新流行、摇滚、嘻哈等10大热门分类下的推荐热门评论,数据接口来源于网易第三方API<a href="https://github.com/Binaryify/NeteaseCloudMusicApi">NeteaseCloudMusicApi</a>。
@@ -28,9 +30,9 @@ NeatMusic是一款基于ReactNative搭建的热门音乐评论推荐应用，每
 
 ### 下载安装
 点击链接进入下载页面
-
+https://github.com/RicardoCao-Biker/NeatMusic/releases/download/v1.0/NeatMusic-0.08.apk
 或扫描二维码下载
-
+<img width="250px" src="http://www.mptab.cn/img/NeatMusic_download.png">
 ### 本地调试
 1. 调试安卓需要下载Android Studio并进行$HOME等相关配置
 2. `npm install`安装依赖

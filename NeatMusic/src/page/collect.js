@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage, ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage, ScrollView, Dimensions } from 'react-native';
 import { } from '../utils/api';
 import store from '../redux/store';
 import { connect } from 'react-redux';
@@ -94,16 +94,16 @@ const mapStateToProps = function (store) {
 };
 
 const styles = StyleSheet.create({
-    commentwrap: { width: 412, height: 617, paddingTop: 20, paddingLeft: 20, paddingRight: 20 },
-    askToAdd: { width: 412, height: 50, position: 'absolute', bottom: 50, flex: 1, flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'black' },
+    commentwrap: { width: Dimensions.get('window').width, height: 617, paddingTop: 20, paddingLeft: 20, paddingRight: 20 },
+    askToAdd: { width: Dimensions.get('window').width, height: 50, position: 'absolute', bottom: 50, flex: 1, flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'black' },
     askText: { color: 'white', lineHeight: 40, marginLeft: 10 },
     twoBtn: { flexDirection: 'row', height: 50, width: 100 },
-    collectList: { width: 412, height: 500 },
-    collectItem: { fontSize: 20, lineHeight: 45, width: 340, borderBottomColor: '#e3dada', borderBottomWidth: 1 },
+    collectList: { width: Dimensions.get('window').width, height: 500 },
+    collectItem: { fontSize: 20, lineHeight: 45, width: 320, borderBottomColor: '#e3dada', borderBottomWidth: 1 },
     wrapper: { flexDirection: 'row', justifyContent: 'space-between' },
     collectName: { flexDirection: 'row' },
     collectIndex: { color: '#757575', lineHeight: 45, marginRight: 15 },
-    play: { right: 50, width: 25, height: 25, marginTop: 10 },
+    play: { right: 60, width: 25, height: 25, marginTop: 10 },
 })
 
 export default connect(mapStateToProps)(Collect);

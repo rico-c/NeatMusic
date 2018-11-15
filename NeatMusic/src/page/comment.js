@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { pop, listDetail, classical, rock, hiphop, hotComment, west, japan, minyao, metal, punk, eng } from '../utils/api';
 import store from '../redux/store';
 import { connect } from 'react-redux';
@@ -244,11 +244,11 @@ const styles = StyleSheet.create({
     curentType: { color: 'white', },
     moreType: { flexDirection: 'row', position: 'absolute', top: 27, width: 250, flexWrap: 'wrap' },
     moreTypeItem: { backgroundColor: 'black', color: 'white', padding: 8, margin: 3 },
-    Image: { width: 412, height: 617 },
+    Image: { width: Dimensions.get('window').width, height: Dimensions.get('window').height },
     arrow: { width: 20, height: 20 },
-    Bg: { width: 280, height: 617, position: "absolute", left: 75, top: 0, justifyContent: "center", alignItems: "center" },
-    redBg: { backgroundColor: '#cc3300', width: 270, position: 'relative', bottom: 20 },
-    comment: { backgroundColor: 'white', position: 'relative', width: 280, right: 16, top: 6, padding: 10, borderColor: '#cc3300', borderWidth: 4 },
+    Bg: { width: Dimensions.get('window').width * 7 / 10, height: 617, position: "absolute", left: 65, top: 0, justifyContent: "center", alignItems: "center" },
+    redBg: { backgroundColor: '#cc3300', width: Dimensions.get('window').width * 7 / 10 - 10, position: 'relative', bottom: 20 },
+    comment: { backgroundColor: 'white', position: 'relative', width: Dimensions.get('window').width * 7 / 10, right: 16, top: 6, padding: 10, borderColor: '#cc3300', borderWidth: 4 },
     comment_content: { color: '#cc3300', fontSize: 16, fontWeight: 'bold', lineHeight: 22 },
     comment_info: { color: '#cc3300', fontSize: 12, marginTop: 10 },
     redArrow: { width: 0, height: 0, borderWidth: 10, borderLeftColor: '#cc3300', borderTopColor: '#cc3300', borderRightColor: 'transparent', borderBottomColor: 'transparent', position: 'absolute', bottom: -24, left: -4 },
