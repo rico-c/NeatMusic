@@ -21,12 +21,12 @@ NeatMusic是一款基于ReactNative搭建的热门音乐评论推荐应用，每
 
 ### 应用截屏
 
-<img width="250px" src="http://www.mptab.cn/img/ss1.png">
-<img width="250px" src="http://www.mptab.cn/img/ss2.png">
-<img width="250px" src="http://www.mptab.cn/img/ss3.png">
-<img width="250px" src="http://www.mptab.cn/img/ss4.png">
-<img width="250px" src="http://www.mptab.cn/img/ss5.png">
-<img width="250px" src="http://www.mptab.cn/img/ss6.png">
+<img width="250px" src="http://www.ricofishing.com/img/ss1.png">
+<img width="250px" src="http://www.ricofishing.com/img/ss2.png">
+<img width="250px" src="http://www.ricofishing.com/img/ss3.png">
+<img width="250px" src="http://www.ricofishing.com/img/ss4.png">
+<img width="250px" src="http://www.ricofishing.com/img/ss5.png">
+<img width="250px" src="http://www.ricofishing.com/img/ss6.png">
 
 ### 下载安装
 点击链接进入下载页面
