@@ -1,5 +1,5 @@
 <center>
-  <img width="100px" src="http://www.mptab.cn/img/neatmusicicon.png">
+  <img width="100px" src="http://www.ricofishing.com/img/neatmusicicon.png">
   </center>
 <p align="center">
   <img src="https://img.shields.io/circleci/project/github/vuejs/vue/dev.svg" alt="Build Status">
