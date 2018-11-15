@@ -1,6 +1,6 @@
-<center>
-  <img width="100px" src="http://www.ricofishing.com/img/neatmusicicon.png">
-  </center>
+<p align="center">
+  <img width="100px" align="center" src="http://www.ricofishing.com/img/neatmusicicon.png">
+  </p>
 <p align="center">
   <img src="https://img.shields.io/circleci/project/github/vuejs/vue/dev.svg" alt="Build Status">
   <a href="https://github.com/RicardoCao-Biker/NeatMusic/releases/download/v1.0/NeatMusic-0.08.apk"><img src="https://img.shields.io/npm/dm/vue.svg" alt="Downloads"></a>
@@ -31,7 +31,9 @@ NeatMusic是一款基于ReactNative搭建的热门音乐评论推荐应用，每
 ### 下载安装
 点击链接进入下载页面
 https://github.com/RicardoCao-Biker/NeatMusic/releases/download/v1.0/NeatMusic-0.08.apk
+<p></p>
 或扫描二维码下载
+<p></p>
 <img width="250px" src="http://www.mptab.cn/img/NeatMusic_download.png">
 ### 本地调试
 1. 调试安卓需要下载Android Studio并进行$HOME等相关配置
